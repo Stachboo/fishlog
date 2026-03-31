@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+/* =========================================================
+   FishLog Design System — CSS Custom Properties
+   Source of truth: DESIGN.md
+   Aesthetic: Industrial/Automobile cockpit, dark-first
+   ========================================================= */
+
+@theme {
+  /* --- Colors: Backgrounds & Surfaces --- */
+  --color-bg: #0a1628;
+  --color-surface: #12213b;
+  --color-surface-hover: #1a2d4d;
+  --color-surface-border: #1e3454;
+
+  /* --- Colors: Text --- */
+  --color-text-primary: #e8ecf1;
+  --color-text-secondary: #7a8ba3;
+  --color-text-muted: #4a5d78;
+
+  /* --- Colors: Gauge Accents --- */
+  --color-air-temp: #ff7b3a;
+  --color-water-temp: #00d4ff;
+  --color-wind-speed: #4ade80;
+  --color-pressure: #a78bfa;
+  --color-moon: #d4d4d8;
+  --color-sunrise: #fbbf24;
+
+  /* --- Colors: Score --- */
+  --color-score-good: #4ade80;
+  --color-score-mid: #fbbf24;
+  --color-score-bad: #ef4444;
+
+  /* --- Colors: Semantic --- */
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-error: #ef4444;
+  --color-info: #00d4ff;
+
+  /* --- Spacing (4px base) --- */
+  --spacing-2xs: 2px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+
+  /* --- Border Radius --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* --- Font Families --- */
+  --font-display: "General Sans", var(--font-dm-sans), sans-serif;
+  --font-body: var(--font-dm-sans), sans-serif;
+  --font-data: var(--font-geist-mono), monospace;
+  --font-arabic: var(--font-noto-arabic), sans-serif;
+
+  /* --- Font Sizes --- */
+  --text-hero: 2.625rem;   /* 42px */
+  --text-h1: 1.75rem;      /* 28px */
+  --text-h2: 1.375rem;     /* 22px */
+  --text-h3: 1.125rem;     /* 18px */
+  --text-body: 0.9375rem;  /* 15px */
+  --text-small: 0.8125rem; /* 13px */
+  --text-micro: 0.6875rem; /* 11px */
+  --text-data-lg: 1.75rem;    /* 28px, Geist Mono */
+  --text-data-gauge: 1.375rem; /* 22px, Geist Mono */
+  --text-data-sm: 0.75rem;    /* 12px, Geist Mono */
+
+  /* --- Motion: Easing --- */
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-move: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* --- Motion: Duration --- */
+  --duration-micro: 75ms;
+  --duration-short: 200ms;
+  --duration-medium: 350ms;
+  --duration-long: 550ms;
+
+  /* --- Layout --- */
+  --max-content-width: 1200px;
+}
+
+/* =========================================================
+   Base styles
+   ========================================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--color-bg);
+}
+
+/* =========================================================
+   Light mode overrides
+   ========================================================= */
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-bg: #f0f2f5;
+    --color-surface: #ffffff;
+    --color-surface-hover: #e8eaed;
+    --color-surface-border: #e2e5ea;
+    --color-text-primary: #0a1628;
+    --color-text-secondary: #4a5d78;
+    --color-text-muted: #7a8ba3;
+    /* Gauge accents: slightly desaturated for light mode */
+    --color-air-temp: #e86d2e;
+    --color-water-temp: #00b8e0;
+    --color-wind-speed: #3cc46e;
+    --color-pressure: #9070e0;
+    --color-moon: #b0b0b8;
+    --color-sunrise: #e0a820;
+  }
+}
+
+/* =========================================================
+   Reduced motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   RTL support
+   ========================================================= */
+
+[dir="rtl"] {
+  font-family: var(--font-arabic), sans-serif;
+}
+
+/* =========================================================
+   Utility: focus ring (WCAG AA, gauge accent color)
+   ========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--color-air-temp);
+  outline-offset: 2px;
+}

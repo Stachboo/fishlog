@@ -1,0 +1,87 @@
+{
+  "common": {
+    "appName": "FishLog",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "loading": "جارٍ التحميل...",
+    "error": "خطأ",
+    "retry": "إعادة المحاولة",
+    "search": "بحث",
+    "noResults": "لا توجد نتائج",
+    "back": "رجوع"
+  },
+  "auth": {
+    "signIn": "تسجيل الدخول",
+    "signOut": "تسجيل الخروج",
+    "signInWith": "تسجيل الدخول بـ {provider}",
+    "welcome": "مرحباً بك في FishLog"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "sessionScore": "نتيجة الجلسة",
+    "airTemp": "درجة حرارة الهواء",
+    "waterTemp": "درجة حرارة الماء",
+    "windSpeed": "سرعة الرياح",
+    "windDirection": "اتجاه الرياح",
+    "pressure": "الضغط الجوي",
+    "moonPhase": "طور القمر",
+    "sunrise": "شروق الشمس",
+    "sunset": "غروب الشمس",
+    "selectSpot": "اختر موقعاً",
+    "searchLocation": "ابحث عن موقع...",
+    "conditions": "ظروف الصيد",
+    "excellent": "ممتاز",
+    "good": "جيد",
+    "moderate": "متوسط",
+    "poor": "سيء"
+  },
+  "spots": {
+    "title": "مواقعي",
+    "addSpot": "إضافة موقع",
+    "editSpot": "تعديل الموقع",
+    "spotName": "اسم الموقع",
+    "memo": "ملاحظة",
+    "public": "عام",
+    "private": "خاص",
+    "rating": "التقييم",
+    "noSpots": "لا توجد مواقع محفوظة",
+    "addFirst": "أضف أول موقع صيد لك"
+  },
+  "journal": {
+    "title": "السجل",
+    "newSession": "جلسة جديدة",
+    "date": "التاريخ",
+    "spot": "الموقع",
+    "technique": "الأسلوب",
+    "bait": "الطعم",
+    "notes": "ملاحظات",
+    "noSessions": "لا توجد جلسات مسجلة",
+    "startFirst": "سجّل جلستك الأولى"
+  },
+  "alerts": {
+    "title": "التنبيهات",
+    "biting": "السمك يعض!",
+    "notBiting": "السمك لا يعض",
+    "report": "إبلاغ",
+    "recentReports": "التقارير الأخيرة"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "language": "اللغة",
+    "darkMode": "الوضع الداكن",
+    "notifications": "الإشعارات",
+    "offline": "وضع عدم الاتصال"
+  },
+  "onboarding": {
+    "welcome": "مرحباً بك في FishLog",
+    "step1": "أين تصطاد السمك؟",
+    "step2": "إليك ظروف الصيد لديك",
+    "step3": "احفظ أول موقع لك",
+    "searchPlaceholder": "ابحث عن موقع...",
+    "skip": "تخطي",
+    "next": "التالي",
+    "done": "هيا بنا!"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "common": {
+    "appName": "FishLog",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "retry": "Réessayer",
+    "search": "Rechercher",
+    "noResults": "Aucun résultat",
+    "back": "Retour"
+  },
+  "auth": {
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "signInWith": "Se connecter avec {provider}",
+    "welcome": "Bienvenue sur FishLog"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "sessionScore": "Score Session",
+    "airTemp": "Temp. Air",
+    "waterTemp": "Temp. Eau",
+    "windSpeed": "Vitesse Vent",
+    "windDirection": "Direction Vent",
+    "pressure": "Pression",
+    "moonPhase": "Phase Lunaire",
+    "sunrise": "Lever du soleil",
+    "sunset": "Coucher du soleil",
+    "selectSpot": "Sélectionner un spot",
+    "searchLocation": "Rechercher un lieu...",
+    "conditions": "Conditions de pêche",
+    "excellent": "Excellent",
+    "good": "Bon",
+    "moderate": "Modéré",
+    "poor": "Mauvais"
+  },
+  "spots": {
+    "title": "Mes Spots",
+    "addSpot": "Ajouter un spot",
+    "editSpot": "Modifier le spot",
+    "spotName": "Nom du spot",
+    "memo": "Mémo",
+    "public": "Public",
+    "private": "Privé",
+    "rating": "Note",
+    "noSpots": "Aucun spot sauvegardé",
+    "addFirst": "Ajoutez votre premier spot de pêche"
+  },
+  "journal": {
+    "title": "Journal",
+    "newSession": "Nouvelle session",
+    "date": "Date",
+    "spot": "Spot",
+    "technique": "Technique",
+    "bait": "Appât",
+    "notes": "Notes",
+    "noSessions": "Aucune session enregistrée",
+    "startFirst": "Enregistrez votre première session"
+  },
+  "alerts": {
+    "title": "Alertes",
+    "biting": "Ça mord !",
+    "notBiting": "Ça ne mord pas",
+    "report": "Signaler",
+    "recentReports": "Signalements récents"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "darkMode": "Mode sombre",
+    "notifications": "Notifications",
+    "offline": "Mode hors-ligne"
+  },
+  "onboarding": {
+    "welcome": "Bienvenue sur FishLog",
+    "step1": "Où est-ce que tu pêches ?",
+    "step2": "Voici tes conditions de pêche",
+    "step3": "Sauvegarde ton premier spot",
+    "searchPlaceholder": "Chercher un lieu...",
+    "skip": "Passer",
+    "next": "Suivant",
+    "done": "C'est parti !"
+  }
+}

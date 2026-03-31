@@ -1,5 +1,6 @@
 import { relations } from "drizzle-orm";
 import { users } from "./users";
+import { accounts, authSessions } from "./auth";
 import { spots } from "./spots";
 import { spotRatings } from "./spot-ratings";
 import { fishingSessions } from "./sessions";
@@ -7,11 +8,27 @@ import { communityReports } from "./community-reports";
 import { pushSubscriptions } from "./push-subscriptions";
 
 export const usersRelations = relations(users, ({ many }) => ({
+  accounts: many(accounts),
+  authSessions: many(authSessions),
   spots: many(spots),
   fishingSessions: many(fishingSessions),
   spotRatings: many(spotRatings),
   communityReports: many(communityReports),
   pushSubscriptions: many(pushSubscriptions),
+}));
+
+export const accountsRelations = relations(accounts, ({ one }) => ({
+  user: one(users, {
+    fields: [accounts.userId],
+    references: [users.id],
+  }),
+}));
+
+export const authSessionsRelations = relations(authSessions, ({ one }) => ({
+  user: one(users, {
+    fields: [authSessions.userId],
+    references: [users.id],
+  }),
 }));
 
 export const spotsRelations = relations(spots, ({ one, many }) => ({

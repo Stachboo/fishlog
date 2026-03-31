@@ -1,4 +1,5 @@
 export * from "./users";
+export * from "./auth";
 export * from "./spots";
 export * from "./spot-ratings";
 export * from "./sessions";

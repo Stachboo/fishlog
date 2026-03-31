@@ -1,0 +1,87 @@
+{
+  "common": {
+    "appName": "FishLog",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "search": "Search",
+    "noResults": "No results",
+    "back": "Back"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "signInWith": "Sign in with {provider}",
+    "welcome": "Welcome to FishLog"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "sessionScore": "Session Score",
+    "airTemp": "Air Temp.",
+    "waterTemp": "Water Temp.",
+    "windSpeed": "Wind Speed",
+    "windDirection": "Wind Direction",
+    "pressure": "Pressure",
+    "moonPhase": "Moon Phase",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "selectSpot": "Select a spot",
+    "searchLocation": "Search a location...",
+    "conditions": "Fishing conditions",
+    "excellent": "Excellent",
+    "good": "Good",
+    "moderate": "Moderate",
+    "poor": "Poor"
+  },
+  "spots": {
+    "title": "My Spots",
+    "addSpot": "Add a spot",
+    "editSpot": "Edit spot",
+    "spotName": "Spot name",
+    "memo": "Memo",
+    "public": "Public",
+    "private": "Private",
+    "rating": "Rating",
+    "noSpots": "No saved spots",
+    "addFirst": "Add your first fishing spot"
+  },
+  "journal": {
+    "title": "Journal",
+    "newSession": "New session",
+    "date": "Date",
+    "spot": "Spot",
+    "technique": "Technique",
+    "bait": "Bait",
+    "notes": "Notes",
+    "noSessions": "No recorded sessions",
+    "startFirst": "Record your first session"
+  },
+  "alerts": {
+    "title": "Alerts",
+    "biting": "They're biting!",
+    "notBiting": "Not biting",
+    "report": "Report",
+    "recentReports": "Recent reports"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "darkMode": "Dark mode",
+    "notifications": "Notifications",
+    "offline": "Offline mode"
+  },
+  "onboarding": {
+    "welcome": "Welcome to FishLog",
+    "step1": "Where do you fish?",
+    "step2": "Here are your fishing conditions",
+    "step3": "Save your first spot",
+    "searchPlaceholder": "Search a location...",
+    "skip": "Skip",
+    "next": "Next",
+    "done": "Let's go!"
+  }
+}

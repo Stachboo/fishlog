@@ -45,3 +45,8 @@ next-env.d.ts
 # IDE
 .vscode/
 .idea/
+
+# Local config
+.claude/
+.gstack/
+conversation.txt

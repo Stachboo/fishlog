@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
+import { cookies } from "next/headers";
+import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 
 // ── Fonts ──────────────────────────────────────────────────────────────────
@@ -55,15 +57,31 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
+// ── Supported locales ──────────────────────────────────────────────────────
+const SUPPORTED_LOCALES = ["fr", "en", "ar"] as const;
+type Locale = (typeof SUPPORTED_LOCALES)[number];
+
+function resolveLocale(value: string | undefined): Locale {
+  return SUPPORTED_LOCALES.includes(value as Locale) ? (value as Locale) : "fr";
+}
+
 // ── Root Layout ────────────────────────────────────────────────────────────
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const locale = resolveLocale(cookieStore.get("NEXT_LOCALE")?.value);
+  const isRTL = locale === "ar";
+
+  // Load messages for the current locale
+  const messages = (await import(`../messages/${locale}.json`)).default;
+
   return (
     <html
-      lang="fr"
+      lang={locale}
+      dir={isRTL ? "rtl" : "ltr"}
       // data-theme attribute allows manual dark/light override (stored in localStorage)
       suppressHydrationWarning
     >
@@ -74,7 +92,9 @@ export default function RootLayout({
           notoArabic.variable,
         ].join(" ")}
       >
-        {children}
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

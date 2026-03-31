@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
 import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
+import { SWRegister } from "@/components/sw-register";
+import { OfflineIndicator } from "@/components/offline-indicator";
 import "./globals.css";
 
 // ── Fonts ──────────────────────────────────────────────────────────────────
@@ -94,6 +96,8 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
+          <SWRegister />
+          <OfflineIndicator />
         </NextIntlClientProvider>
       </body>
     </html>

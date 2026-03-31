@@ -15,9 +15,10 @@ export class AuthError extends Error {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type RouteHandler = (
   req: NextRequest,
-  context?: { params: Promise<Record<string, string>> }
+  context?: { params: Promise<any> }
 ) => Promise<NextResponse>;
 
 function logError(code: string, error: unknown): void {

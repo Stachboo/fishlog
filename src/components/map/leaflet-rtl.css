@@ -1,0 +1,46 @@
+/**
+ * Leaflet RTL fixes for Arabic (dir="rtl")
+ * Applied when <html dir="rtl"> is set
+ */
+
+[dir="rtl"] .leaflet-control-zoom {
+  float: right;
+}
+
+[dir="rtl"] .leaflet-control-attribution {
+  float: left;
+  text-align: left;
+}
+
+[dir="rtl"] .leaflet-popup-content {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .leaflet-popup-tip-container {
+  direction: ltr;
+}
+
+[dir="rtl"] .leaflet-bar a {
+  float: none;
+}
+
+[dir="rtl"] .leaflet-control-container .leaflet-top.leaflet-right {
+  left: 10px;
+  right: auto;
+}
+
+[dir="rtl"] .leaflet-control-container .leaflet-top.leaflet-left {
+  right: 10px;
+  left: auto;
+}
+
+[dir="rtl"] .leaflet-control-container .leaflet-bottom.leaflet-right {
+  left: 10px;
+  right: auto;
+}
+
+[dir="rtl"] .leaflet-control-container .leaflet-bottom.leaflet-left {
+  right: 10px;
+  left: auto;
+}

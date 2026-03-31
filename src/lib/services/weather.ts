@@ -8,7 +8,7 @@
 
 import SunCalc from "suncalc";
 import { computeFishingScore } from "./score";
-import { getCachedWeather, setCachedWeather } from "./cache";
+import { getCachedWeather, setCachedWeather, incrementOwmCallCounter } from "./cache";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -69,6 +69,10 @@ async function fetchOWM(lat: number, lon: number): Promise<{
   }
 
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
+
+  // Track OWM API budget (fire and forget)
+  incrementOwmCallCounter().catch(() => {});
+
   const res = await fetch(url, { next: { revalidate: 0 } });
 
   if (!res.ok) {

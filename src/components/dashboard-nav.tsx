@@ -6,18 +6,21 @@ import { useTranslations } from "next-intl";
 
 export function DashboardNav() {
   const t = useTranslations("dashboard");
+  const ta = useTranslations("alerts");
   const pathname = usePathname();
 
   const tabs = [
     { href: "/", label: t("dashboard") },
     { href: "/spots", label: t("spots") },
     { href: "/journal", label: t("journal") },
+    { href: "/compare", label: t("compare") },
+    { href: "/alerts", label: ta("title") },
   ];
 
   return (
     <nav style={{ display: "flex", gap: "var(--spacing-xs)" }} aria-label="Navigation principale">
       {tabs.map(({ href, label }) => {
-        const active = pathname === href;
+        const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
         return (
           <Link
             key={href}

@@ -35,7 +35,14 @@
     "excellent": "ممتاز",
     "good": "جيد",
     "moderate": "متوسط",
-    "poor": "سيء"
+    "poor": "سيء",
+    "humidity": "الرطوبة",
+    "addLocation": "أضف موقعاً للبدء",
+    "updatedAt": "تحديث الساعة {time}",
+    "noLocation": "لم يتم تحديد موقع",
+    "spots": "المواقع",
+    "journal": "السجل",
+    "dashboard": "لوحة التحكم"
   },
   "spots": {
     "title": "مواقعي",

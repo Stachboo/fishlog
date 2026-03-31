@@ -17,7 +17,7 @@ export class AuthError extends Error {
 
 type RouteHandler = (
   req: NextRequest,
-  context?: { params: Record<string, string> }
+  context?: { params: Promise<Record<string, string>> }
 ) => Promise<NextResponse>;
 
 function logError(code: string, error: unknown): void {

@@ -35,7 +35,14 @@
     "excellent": "Excellent",
     "good": "Good",
     "moderate": "Moderate",
-    "poor": "Poor"
+    "poor": "Poor",
+    "humidity": "Humidity",
+    "addLocation": "Add a location to get started",
+    "updatedAt": "Updated at {time}",
+    "noLocation": "No location selected",
+    "spots": "Spots",
+    "journal": "Journal",
+    "dashboard": "Dashboard"
   },
   "spots": {
     "title": "My Spots",

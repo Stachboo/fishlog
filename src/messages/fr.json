@@ -39,6 +39,7 @@
     "poor": "Mauvais",
     "humidity": "Humidité",
     "addLocation": "Ajoutez un lieu pour commencer",
+    "saveSpot": "Sauvegarder ce spot",
     "updatedAt": "Mis à jour à {time}",
     "noLocation": "Aucun lieu sélectionné",
     "spots": "Spots",

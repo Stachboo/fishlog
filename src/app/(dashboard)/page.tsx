@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
 import { GaugeSVG } from "@/components/ui/gauge-svg";
 import { CompassSVG } from "@/components/ui/compass-svg";
 import { MoonIcon } from "@/components/ui/moon-icon";
@@ -133,7 +134,7 @@ function WeatherGauges({ data, t }: GaugesProps) {
           {t("conditions")}
         </h2>
 
-        <div style={{ transform: "scale(1.25)", transformOrigin: "center" }}>
+        <div style={{ transform: "scale(1.25)", transformOrigin: "center", marginTop: "var(--spacing-md)" }}>
           <GaugeSVG
             value={data.score}
             min={0}
@@ -425,8 +426,11 @@ export default function DashboardPage() {
 
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [locationName, setLocationName] = useState<string | null>(null);
+  const [currentCoords, setCurrentCoords] = useState<{ lat: number; lon: number } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [spotSaved, setSpotSaved] = useState(false);
+  const { data: session } = useSession();
 
   const tc = useTranslations("common");
 
@@ -445,6 +449,8 @@ export default function DashboardPage() {
   const fetchWeather = useCallback(async (lat: number, lon: number) => {
     setLoading(true);
     setError(null);
+    setCurrentCoords({ lat, lon });
+    setSpotSaved(false);
     try {
       const res = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
       if (!res.ok) {
@@ -524,20 +530,68 @@ export default function DashboardPage() {
         {/* Location name */}
         <div style={{ flex: 1, minWidth: 0 }}>
           {locationName ? (
-            <h1
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "var(--text-h2)",
-                fontWeight: 600,
-                color: "var(--color-text-primary)",
-                margin: 0,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {locationName}
-            </h1>
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-sm)" }}>
+              <h1
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: "var(--text-h2)",
+                  fontWeight: 600,
+                  color: "var(--color-text-primary)",
+                  margin: 0,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {locationName}
+              </h1>
+              {session?.user && currentCoords && !spotSaved && (
+                <button
+                  type="button"
+                  title={t("saveSpot")}
+                  onClick={async () => {
+                    try {
+                      const res = await fetch("/api/spots", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          name: locationName,
+                          latitude: currentCoords.lat,
+                          longitude: currentCoords.lon,
+                          isPublic: false,
+                        }),
+                      });
+                      if (res.ok) setSpotSaved(true);
+                    } catch { /* ignore */ }
+                  }}
+                  style={{
+                    background: "transparent",
+                    border: "1px solid var(--color-surface-border)",
+                    borderRadius: "var(--radius-md)",
+                    padding: "var(--spacing-xs) var(--spacing-sm)",
+                    cursor: "pointer",
+                    color: "var(--color-water-temp)",
+                    fontFamily: "var(--font-body)",
+                    fontSize: "var(--text-micro)",
+                    fontWeight: 500,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                    flexShrink: 0,
+                    transition: "background var(--duration-short)",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "var(--color-surface)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+                >
+                  📍+
+                </button>
+              )}
+              {spotSaved && (
+                <span style={{ color: "var(--color-success)", fontSize: "var(--text-micro)", fontFamily: "var(--font-body)" }}>
+                  ✓
+                </span>
+              )}
+            </div>
           ) : (
             <h1
               style={{

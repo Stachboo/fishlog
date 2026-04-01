@@ -39,6 +39,7 @@
     "poor": "Poor",
     "humidity": "Humidity",
     "addLocation": "Add a location to get started",
+    "saveSpot": "Save this spot",
     "updatedAt": "Updated at {time}",
     "noLocation": "No location selected",
     "spots": "Spots",

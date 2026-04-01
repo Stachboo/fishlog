@@ -359,6 +359,7 @@ export function SpotsClient({ currentUserId }: { currentUserId: string }) {
           currentUserId={currentUserId}
           onMapClick={handleMapClick}
           onSpotClick={handleSpotClick}
+          selectedPosition={mode.kind === "adding" ? { lat: mode.lat, lng: mode.lng } : null}
         />
       </div>
 

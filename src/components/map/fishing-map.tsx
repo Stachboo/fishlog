@@ -32,6 +32,8 @@ interface FishingMapProps {
   currentUserId: string;
   onMapClick?: (lat: number, lng: number) => void;
   onSpotClick?: (spot: SpotMarker) => void;
+  /** Temporary marker for spot being created (before save) */
+  selectedPosition?: { lat: number; lng: number } | null;
   center?: [number, number];
   zoom?: number;
 }
@@ -70,11 +72,13 @@ export function FishingMap({
   currentUserId,
   onMapClick,
   onSpotClick,
+  selectedPosition,
   center = [46.6034, 1.8883], // France centroid
   zoom = 6,
 }: FishingMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
+  const selectedMarkerRef = useRef<Marker | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const clusterGroupRef = useRef<any>(null);
 
@@ -147,6 +151,42 @@ export function FishingMap({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [spots]);
+
+  // ── Show/update temporary marker for selected position ──────────────────
+
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    // Remove previous temp marker
+    if (selectedMarkerRef.current) {
+      mapRef.current.removeLayer(selectedMarkerRef.current);
+      selectedMarkerRef.current = null;
+    }
+
+    if (!selectedPosition) return;
+
+    import("leaflet").then(({ default: L }) => {
+      if (!mapRef.current) return;
+
+      const pulsingIcon = L.divIcon({
+        html: `
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="46" viewBox="0 0 36 46">
+            <path d="M18 0C8.059 0 0 8.059 0 18c0 11.14 16 28 18 28s18-16.86 18-28C36 8.059 27.941 0 18 0z"
+                  fill="#ef4444" stroke="#fff" stroke-width="2"/>
+            <circle cx="18" cy="18" r="7" fill="white"/>
+            <circle cx="18" cy="18" r="3" fill="#ef4444"/>
+          </svg>
+        `,
+        className: "",
+        iconSize: [36, 46],
+        iconAnchor: [18, 46],
+      });
+
+      const marker = L.marker([selectedPosition.lat, selectedPosition.lng], { icon: pulsingIcon });
+      marker.addTo(mapRef.current);
+      selectedMarkerRef.current = marker;
+    });
+  }, [selectedPosition]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function addSpotMarkers(

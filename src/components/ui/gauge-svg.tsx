@@ -129,6 +129,7 @@ export function GaugeSVG({
         width={SIZE}
         height={SIZE}
         viewBox={`0 0 ${SIZE} ${SIZE}`}
+        preserveAspectRatio="xMidYMid meet"
         role="meter"
         aria-valuenow={clampedValue}
         aria-valuemin={min}

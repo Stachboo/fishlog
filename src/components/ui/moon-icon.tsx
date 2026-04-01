@@ -133,6 +133,7 @@ export function MoonIcon({ phase, size = 32, className }: MoonIconProps) {
       width={size}
       height={size}
       viewBox={`0 0 ${size} ${size}`}
+      preserveAspectRatio="xMidYMid meet"
       role="img"
       aria-label={phaseLabel}
       className={className}

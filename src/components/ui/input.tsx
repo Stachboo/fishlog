@@ -46,7 +46,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             "bg-[var(--color-bg)] border border-[var(--color-surface-border)]",
             "rounded-[var(--radius-md)]",
             // Focus
-            "transition-colors duration-[var(--duration-short)]",
+            "transition-colors",
             "focus:outline-none focus:border-[var(--color-water-temp)]",
             "focus:ring-1 focus:ring-[var(--color-water-temp)]",
             // Error state

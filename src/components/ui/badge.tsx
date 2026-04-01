@@ -11,17 +11,27 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 // ── Variant styles ─────────────────────────────────────────────────────────
 
-const variantStyles: Record<BadgeVariant, string> = {
-  default:
-    "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-surface-border)]",
-  success:
-    "bg-[color-mix(in_srgb,var(--color-success)_15%,transparent)] text-[var(--color-success)] border border-[color-mix(in_srgb,var(--color-success)_30%,transparent)]",
-  warning:
-    "bg-[color-mix(in_srgb,var(--color-warning)_15%,transparent)] text-[var(--color-warning)] border border-[color-mix(in_srgb,var(--color-warning)_30%,transparent)]",
-  error:
-    "bg-[color-mix(in_srgb,var(--color-error)_15%,transparent)] text-[var(--color-error)] border border-[color-mix(in_srgb,var(--color-error)_30%,transparent)]",
-  info:
-    "bg-[color-mix(in_srgb,var(--color-info)_15%,transparent)] text-[var(--color-info)] border border-[color-mix(in_srgb,var(--color-info)_30%,transparent)]",
+const variantConfig: Record<BadgeVariant, { color: string; className: string }> = {
+  default: {
+    color: "",
+    className: "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-surface-border)]",
+  },
+  success: {
+    color: "var(--color-success)",
+    className: "text-[var(--color-success)]",
+  },
+  warning: {
+    color: "var(--color-warning)",
+    className: "text-[var(--color-warning)]",
+  },
+  error: {
+    color: "var(--color-error)",
+    className: "text-[var(--color-error)]",
+  },
+  info: {
+    color: "var(--color-info)",
+    className: "text-[var(--color-info)]",
+  },
 };
 
 // ── Component ──────────────────────────────────────────────────────────────
@@ -32,6 +42,9 @@ export function Badge({
   children,
   ...props
 }: BadgeProps) {
+  const { color, className: variantClass } = variantConfig[variant];
+  const needsColorMix = variant !== "default" && color;
+
   return (
     <span
       className={cn(
@@ -39,10 +52,14 @@ export function Badge({
         "px-2 py-0.5",
         "text-[var(--text-micro)] font-medium font-[family-name:var(--font-body)]",
         "rounded-[var(--radius-full)]",
-        "whitespace-nowrap",
-        variantStyles[variant],
+        "whitespace-nowrap border",
+        variantClass,
         className
       )}
+      style={needsColorMix ? {
+        background: `color-mix(in srgb, ${color} 15%, transparent)`,
+        borderColor: `color-mix(in srgb, ${color} 30%, transparent)`,
+      } : undefined}
       {...props}
     >
       {children}

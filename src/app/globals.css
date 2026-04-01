@@ -131,6 +131,23 @@ body {
   }
 }
 
+/* Manual light override (works even when OS prefers dark) */
+:root[data-theme="light"] {
+  --color-bg: #f0f2f5;
+  --color-surface: #ffffff;
+  --color-surface-hover: #e8eaed;
+  --color-surface-border: #e2e5ea;
+  --color-text-primary: #0a1628;
+  --color-text-secondary: #4a5d78;
+  --color-text-muted: #7a8ba3;
+  --color-air-temp: #e86d2e;
+  --color-water-temp: #00b8e0;
+  --color-wind-speed: #3cc46e;
+  --color-pressure: #9070e0;
+  --color-moon: #b0b0b8;
+  --color-sunrise: #e0a820;
+}
+
 /* =========================================================
    Reduced motion
    ========================================================= */

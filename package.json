@@ -13,7 +13,9 @@
     "db:studio": "drizzle-kit studio",
     "db:seed": "npx tsx src/lib/db/seed.ts",
     "db:verify": "npx tsx src/lib/db/verify.ts",
-    "generate-icons": "node scripts/generate-icons.cjs"
+    "generate-icons": "node scripts/generate-icons.cjs",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.1",
@@ -23,7 +25,6 @@
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@types/suncalc": "^1.9.2",
     "@upstash/redis": "^1.37.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.2",
@@ -44,8 +45,10 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.0",
     "@types/leaflet": "^1.9.21",
     "@types/leaflet.markercluster": "^1.5.6",
+    "@types/suncalc": "^1.9.2",
     "drizzle-kit": "^0.31.10",
     "serwist": "^9.5.7",
     "tsx": "^4.21.0"

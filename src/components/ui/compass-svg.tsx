@@ -66,6 +66,7 @@ export function CompassSVG({
         width={size}
         height={size}
         viewBox={`0 0 ${size} ${size}`}
+        preserveAspectRatio="xMidYMid meet"
         role="img"
         aria-label={`Direction du vent: ${normalizedDir}°`}
       >

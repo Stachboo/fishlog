@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getQueueSize, processQueue, isOfflineEnabled } from "@/lib/services/offline";
 
 export function OfflineIndicator() {
+  const [enabled, setEnabled] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
   const [queueSize, setQueueSize] = useState(0);
   const [syncing, setSyncing] = useState(false);
@@ -16,6 +17,7 @@ export function OfflineIndicator() {
 
   useEffect(() => {
     if (!isOfflineEnabled()) return;
+    setEnabled(true);
 
     // Init from navigator
     setIsOnline(navigator.onLine);
@@ -53,7 +55,7 @@ export function OfflineIndicator() {
     };
   }, []);
 
-  if (!isOfflineEnabled()) return null;
+  if (!enabled) return null;
 
   // Online with no pending sync — nothing to show
   if (isOnline && !syncing && queueSize === 0) return null;

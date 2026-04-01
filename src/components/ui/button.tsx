@@ -57,7 +57,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           // Base
           "inline-flex items-center justify-center rounded-[var(--radius-md)] font-medium",
           "font-[family-name:var(--font-body)]",
-          "transition-all duration-[var(--duration-short)] ease-[var(--ease-move)]",
+          "transition-all",
           "cursor-pointer select-none",
           // Focus
           "focus-visible:outline-2 focus-visible:outline-[var(--color-air-temp)] focus-visible:outline-offset-2",

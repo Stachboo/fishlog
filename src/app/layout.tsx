@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import { SWRegister } from "@/components/sw-register";
 import { OfflineIndicator } from "@/components/offline-indicator";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 // ── Fonts ──────────────────────────────────────────────────────────────────
@@ -98,6 +99,7 @@ export default async function RootLayout({
           {children}
           <SWRegister />
           <OfflineIndicator />
+          <ThemeProvider />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -7,12 +7,18 @@ import { eq, inArray } from "drizzle-orm";
 
 // ── VAPID configuration ────────────────────────────────────────────────────
 
-const VAPID_PUBLIC = process.env.VAPID_PUBLIC_KEY ?? "";
-const VAPID_PRIVATE = process.env.VAPID_PRIVATE_KEY ?? "";
 const VAPID_MAILTO = "mailto:contact@fishlog.app";
 
-if (VAPID_PUBLIC && VAPID_PRIVATE) {
-  webpush.setVapidDetails(VAPID_MAILTO, VAPID_PUBLIC, VAPID_PRIVATE);
+let vapidConfigured = false;
+
+function ensureVapid() {
+  if (vapidConfigured) return true;
+  const pub = process.env.VAPID_PUBLIC_KEY ?? "";
+  const priv = process.env.VAPID_PRIVATE_KEY ?? "";
+  if (!pub || !priv) return false;
+  webpush.setVapidDetails(VAPID_MAILTO, pub, priv);
+  vapidConfigured = true;
+  return true;
 }
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -40,7 +46,7 @@ export async function sendPushNotification(
   subscription: PushSubscriptionData,
   payload: PushPayload
 ): Promise<void> {
-  if (!VAPID_PUBLIC || !VAPID_PRIVATE) {
+  if (!ensureVapid()) {
     console.warn("VAPID keys not configured — skipping push");
     return;
   }
@@ -96,7 +102,7 @@ export async function notifyZone(
   radiusKm: number,
   payload: PushPayload
 ): Promise<void> {
-  if (!VAPID_PUBLIC || !VAPID_PRIVATE) {
+  if (!ensureVapid()) {
     return;
   }
 

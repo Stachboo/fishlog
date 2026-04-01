@@ -215,21 +215,36 @@ function WeatherGauges({ data, t }: GaugesProps) {
           }
         />
 
-        {/* Wind Speed */}
-        <GaugeSVG
-          value={data.windSpeed}
-          min={0}
-          max={60}
-          unit="km/h"
-          label={t("windSpeed")}
-          colorScale="var(--color-wind-speed)"
-          icon={
-            <svg width={20} height={20} viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M2 8 Q8 8 12 6 Q16 4 17 6 Q18 8 14 9" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" fill="none" />
-              <path d="M2 12 Q9 12 13 10 Q17 8 18 11 Q19 13 15 13" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" fill="none" />
-            </svg>
-          }
-        />
+        {/* Wind Speed + Gusts */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <GaugeSVG
+            value={data.windSpeed}
+            min={0}
+            max={60}
+            unit="km/h"
+            label={t("windSpeed")}
+            colorScale="var(--color-wind-speed)"
+            icon={
+              <svg width={20} height={20} viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M2 8 Q8 8 12 6 Q16 4 17 6 Q18 8 14 9" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" fill="none" />
+                <path d="M2 12 Q9 12 13 10 Q17 8 18 11 Q19 13 15 13" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" fill="none" />
+              </svg>
+            }
+          />
+          {data.windGust != null && (
+            <span
+              style={{
+                fontFamily: "var(--font-data)",
+                fontSize: "var(--text-micro)",
+                color: "var(--color-wind-speed)",
+                opacity: 0.8,
+                marginTop: "-4px",
+              }}
+            >
+              ↑ {data.windGust} km/h
+            </span>
+          )}
+        </div>
 
         {/* Pressure */}
         <GaugeSVG

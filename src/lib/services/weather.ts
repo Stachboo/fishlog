@@ -16,6 +16,7 @@ export interface WeatherData {
   airTemp: number;
   waterTemp: number | null;
   windSpeed: number;
+  windGust: number | null;
   windDirection: number;
   pressure: number;
   humidity: number;
@@ -44,12 +45,13 @@ interface OWMResponse {
   name: string;
   sys: { country: string };
   main: { temp: number; pressure: number; humidity: number };
-  wind: { speed: number; deg: number };
+  wind: { speed: number; deg: number; gust?: number };
 }
 
 async function fetchOWM(lat: number, lon: number): Promise<{
   airTemp: number;
   windSpeed: number;
+  windGust: number | null;
   windDirection: number;
   pressure: number;
   humidity: number;
@@ -61,6 +63,7 @@ async function fetchOWM(lat: number, lon: number): Promise<{
     return {
       airTemp: 18,
       windSpeed: 10,
+      windGust: null,
       windDirection: 180,
       pressure: 1013,
       humidity: 65,
@@ -84,6 +87,7 @@ async function fetchOWM(lat: number, lon: number): Promise<{
   return {
     airTemp: Math.round(data.main.temp * 10) / 10,
     windSpeed: Math.round(data.wind.speed * 3.6 * 10) / 10, // m/s → km/h
+    windGust: data.wind.gust != null ? Math.round(data.wind.gust * 3.6 * 10) / 10 : null,
     windDirection: data.wind.deg ?? 0,
     pressure: data.main.pressure,
     humidity: data.main.humidity,
@@ -172,6 +176,7 @@ export async function getWeather(lat: number, lon: number): Promise<WeatherData>
     airTemp: owm.airTemp,
     waterTemp,
     windSpeed: owm.windSpeed,
+    windGust: owm.windGust,
     windDirection: owm.windDirection,
     pressure: owm.pressure,
     humidity: owm.humidity,

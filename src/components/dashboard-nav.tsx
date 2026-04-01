@@ -24,7 +24,7 @@ export function DashboardNav() {
   const tabs = allTabs.filter((tab) => tab.public || isLoggedIn);
 
   return (
-    <nav style={{ display: "flex", gap: "var(--spacing-xs)", alignItems: "center" }} aria-label="Navigation principale">
+    <nav style={{ display: "flex", gap: "var(--spacing-xs)", alignItems: "center", whiteSpace: "nowrap", flexShrink: 0 }} aria-label="Navigation principale">
       {tabs.map(({ href, label }) => {
         const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
         return (

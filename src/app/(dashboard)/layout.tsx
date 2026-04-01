@@ -33,8 +33,8 @@ export default async function DashboardLayout({ children }: { children: ReactNod
         {t("appName")}
       </span>
 
-      {/* Nav + Lang */}
-      <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-sm)" }}>
+      {/* Nav + Lang — scrollable on mobile */}
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-sm)", overflow: "auto", flexShrink: 1, minWidth: 0 }}>
         <DashboardNav />
         <LanguageSwitcher currentLocale={locale as "fr" | "en" | "ar"} />
       </div>

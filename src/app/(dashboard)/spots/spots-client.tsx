@@ -337,18 +337,20 @@ export function SpotsClient({ currentUserId }: { currentUserId: string }) {
     <div
       style={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         height: "calc(100dvh - 56px - 2 * var(--spacing-lg))",
         minHeight: 500,
         gap: "var(--spacing-md)",
         overflow: "hidden",
       }}
+      className="md:!flex-row"
     >
       {/* Map */}
       <div
         style={{
           flex: "1 1 0",
           minWidth: 0,
+          minHeight: 250,
           borderRadius: "var(--radius-lg)",
           overflow: "hidden",
           border: "1px solid var(--color-surface-border)",
@@ -366,7 +368,6 @@ export function SpotsClient({ currentUserId }: { currentUserId: string }) {
       {/* Sidebar */}
       <div
         style={{
-          width: 340,
           flexShrink: 0,
           background: "var(--color-surface)",
           border: "1px solid var(--color-surface-border)",
@@ -374,7 +375,9 @@ export function SpotsClient({ currentUserId }: { currentUserId: string }) {
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
+          maxHeight: "50dvh",
         }}
+        className="w-full md:!w-[340px] md:!max-h-none"
       >
         {/* Page title (only in idle mode) */}
         {mode.kind === "idle" && (

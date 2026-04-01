@@ -1,10 +1,12 @@
 import { ReactNode } from "react";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { PageLayout } from "@/components/ui/page-layout";
 import { DashboardNav } from "@/components/dashboard-nav";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   const t = await getTranslations("common");
+  const locale = await getLocale();
 
   const header = (
     <div
@@ -13,6 +15,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
         alignItems: "center",
         justifyContent: "space-between",
         height: 56,
+        gap: "var(--spacing-sm)",
       }}
     >
       {/* Logo */}
@@ -24,13 +27,17 @@ export default async function DashboardLayout({ children }: { children: ReactNod
           color: "var(--color-text-primary)",
           letterSpacing: "-0.02em",
           userSelect: "none",
+          flexShrink: 0,
         }}
       >
         {t("appName")}
       </span>
 
-      {/* Nav */}
-      <DashboardNav />
+      {/* Nav + Lang */}
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-sm)" }}>
+        <DashboardNav />
+        <LanguageSwitcher currentLocale={locale as "fr" | "en" | "ar"} />
+      </div>
     </div>
   );
 

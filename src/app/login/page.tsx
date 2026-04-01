@@ -2,7 +2,9 @@
 
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 // ── Google Icon ────────────────────────────────────────────────────────────
 
@@ -88,8 +90,15 @@ function FishLogLogo() {
 
 // ── Login Page ─────────────────────────────────────────────────────────────
 
+function getLocaleFromCookie(): "fr" | "en" | "ar" {
+  if (typeof document === "undefined") return "fr";
+  const match = document.cookie.match(/NEXT_LOCALE=(\w+)/);
+  return (match?.[1] as "fr" | "en" | "ar") ?? "fr";
+}
+
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   async function handleGoogleSignIn() {
     setLoading(true);
@@ -167,7 +176,27 @@ export default function LoginPage() {
             {!loading && <GoogleIcon />}
             Continuer avec Google
           </Button>
+
+          <button
+            type="button"
+            onClick={() => router.push("/")}
+            style={{
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              fontFamily: "var(--font-body)",
+              fontSize: "var(--text-small)",
+              color: "var(--color-text-muted)",
+              textDecoration: "underline",
+              padding: "var(--spacing-xs) 0",
+            }}
+          >
+            Continuer sans compte
+          </button>
         </div>
+
+        {/* Language switcher */}
+        <LanguageSwitcher currentLocale={getLocaleFromCookie()} />
 
         {/* Footer note */}
         <p

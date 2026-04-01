@@ -10,7 +10,8 @@
     "retry": "Retry",
     "search": "Search",
     "noResults": "No results",
-    "back": "Back"
+    "back": "Back",
+    "login": "Login"
   },
   "auth": {
     "signIn": "Sign in",

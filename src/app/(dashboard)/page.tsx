@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { GaugeSVG } from "@/components/ui/gauge-svg";
 import { CompassSVG } from "@/components/ui/compass-svg";
@@ -415,6 +415,18 @@ export default function DashboardPage() {
 
   const tc = useTranslations("common");
 
+  // Reverse geocode to get location name from coordinates
+  const reverseGeocode = useCallback(async (lat: number, lon: number): Promise<string> => {
+    try {
+      const res = await fetch(`/api/geocode?lat=${lat}&lon=${lon}`);
+      if (!res.ok) return `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+      const data = await res.json();
+      return data.name || `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+    } catch {
+      return `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+    }
+  }, []);
+
   const fetchWeather = useCallback(async (lat: number, lon: number) => {
     setLoading(true);
     setError(null);
@@ -433,8 +445,52 @@ export default function DashboardPage() {
     }
   }, [tc]);
 
+  // Auto-geolocate on mount
+  useEffect(() => {
+    // Check localStorage for cached coords
+    const cached = localStorage.getItem("fishlog-coords");
+    if (cached) {
+      try {
+        const { lat, lon, name } = JSON.parse(cached);
+        setLocationName(name);
+        fetchWeather(lat, lon);
+        return;
+      } catch { /* ignore bad cache */ }
+    }
+
+    // Default fallback: Paris
+    const DEFAULT_LAT = 48.8566;
+    const DEFAULT_LON = 2.3522;
+
+    if (!navigator.geolocation) {
+      reverseGeocode(DEFAULT_LAT, DEFAULT_LON).then((name) => {
+        setLocationName(name);
+        fetchWeather(DEFAULT_LAT, DEFAULT_LON);
+      });
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude: lat, longitude: lon } = pos.coords;
+        const name = await reverseGeocode(lat, lon);
+        setLocationName(name);
+        localStorage.setItem("fishlog-coords", JSON.stringify({ lat, lon, name }));
+        fetchWeather(lat, lon);
+      },
+      async () => {
+        // Permission denied — fallback to Paris
+        const name = await reverseGeocode(DEFAULT_LAT, DEFAULT_LON);
+        setLocationName(name);
+        fetchWeather(DEFAULT_LAT, DEFAULT_LON);
+      },
+      { timeout: 8000, maximumAge: 300000 }
+    );
+  }, [fetchWeather, reverseGeocode]);
+
   function handleLocationSelect(loc: GeocodedLocation) {
     setLocationName(loc.name);
+    localStorage.setItem("fishlog-coords", JSON.stringify({ lat: loc.lat, lon: loc.lon, name: loc.name }));
     fetchWeather(loc.lat, loc.lon);
   }
 

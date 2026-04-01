@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
 import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
+import { SessionProvider } from "next-auth/react";
 import { SWRegister } from "@/components/sw-register";
 import { OfflineIndicator } from "@/components/offline-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -95,12 +96,14 @@ export default async function RootLayout({
           notoArabic.variable,
         ].join(" ")}
       >
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-          <SWRegister />
-          <OfflineIndicator />
-          <ThemeProvider />
-        </NextIntlClientProvider>
+        <SessionProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            {children}
+            <SWRegister />
+            <OfflineIndicator />
+            <ThemeProvider />
+          </NextIntlClientProvider>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -143,9 +143,9 @@ function computeSunMoon(lat: number, lon: number, now: Date): {
 // ── Public API ─────────────────────────────────────────────────────────────
 
 export async function getWeather(lat: number, lon: number): Promise<WeatherData> {
-  // 1. Try cache first
+  // 1. Try cache first (invalidate if missing windGust field — schema migration)
   const cached = await getCachedWeather<WeatherData>(lat, lon);
-  if (cached) return cached;
+  if (cached && "windGust" in cached) return cached;
 
   // 2. Fetch all sources in parallel
   const now = new Date();

@@ -131,16 +131,16 @@ export function CompassSVG({
             <stop offset="100%" stopColor="#0a1628" />
           </radialGradient>
 
-          {/* Needle north gradient (red) */}
+          {/* Needle front gradient (wind direction — green) */}
           <linearGradient id="needleNorthGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#f87171" />
-            <stop offset="100%" stopColor="#dc2626" />
+            <stop offset="0%" stopColor="#4ade80" />
+            <stop offset="100%" stopColor="#22c55e" />
           </linearGradient>
 
-          {/* Needle south gradient (silver) */}
+          {/* Needle tail gradient (dark muted) */}
           <linearGradient id="needleSouthGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#e8ecf1" />
-            <stop offset="100%" stopColor="#9ca3af" />
+            <stop offset="0%" stopColor="#374151" />
+            <stop offset="100%" stopColor="#1f2937" />
           </linearGradient>
 
           {/* Pivot ball bearing gradient */}
@@ -359,10 +359,10 @@ export function CompassSVG({
           fill="url(#pivotHighlight)"
         />
 
-        {/* ── Degree readout (bottom of dial) ── */}
+        {/* ── Direction readout (bottom of dial) ── */}
         <text
           x={cx}
-          y={cy + dialR * 0.52}
+          y={cy + dialR * 0.55}
           textAnchor="middle"
           dominantBaseline="central"
           fill="#4a5d78"
@@ -370,21 +370,7 @@ export function CompassSVG({
           fontSize={size * 0.065}
           fontWeight={500}
         >
-          {`${normalizedDir}°`}
-        </text>
-
-        {/* ── Cardinal direction readout (above degree) ── */}
-        <text
-          x={cx}
-          y={cy + dialR * 0.34}
-          textAnchor="middle"
-          dominantBaseline="central"
-          fill="#e8ecf1"
-          fontFamily="var(--font-data)"
-          fontSize={size * 0.085}
-          fontWeight={700}
-        >
-          {cardinal}
+          {`${cardinal} ${normalizedDir}°`}
         </text>
       </svg>
 

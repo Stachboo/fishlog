@@ -107,8 +107,9 @@ export default function LoginPage() {
     >
       {/* Card */}
       <div
-        className="w-full max-w-sm rounded-[var(--radius-lg)] border p-8 flex flex-col items-center gap-6"
+        className="w-full rounded-[var(--radius-lg)] border p-8 flex flex-col items-center gap-6"
         style={{
+          maxWidth: "24rem",
           backgroundColor: "var(--color-surface)",
           borderColor: "var(--color-surface-border)",
         }}

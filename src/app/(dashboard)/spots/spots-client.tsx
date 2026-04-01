@@ -372,12 +372,11 @@ export function SpotsClient({ currentUserId }: { currentUserId: string }) {
           background: "var(--color-surface)",
           border: "1px solid var(--color-surface-border)",
           borderRadius: "var(--radius-lg)",
-          overflow: "hidden",
+          overflowY: "auto",
           display: "flex",
           flexDirection: "column",
-          maxHeight: "50dvh",
         }}
-        className="w-full md:!w-[340px] md:!max-h-none"
+        className="w-full max-h-[60dvh] md:!w-[340px] md:!max-h-none"
       >
         {/* Page title (only in idle mode) */}
         {mode.kind === "idle" && (

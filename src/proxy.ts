@@ -6,7 +6,7 @@ export default auth((req) => {
 
   const isLoginPage = pathname === "/login";
   const isApiAuth = pathname.startsWith("/api/auth");
-  const isPublicApi = pathname === "/api/health" || pathname === "/api/weather" || pathname === "/api/geocode";
+  const isPublicApi = pathname === "/api/health" || pathname.startsWith("/api/weather") || pathname === "/api/geocode";
   const isDashboard = pathname === "/";
 
   // Always allow auth API routes, public APIs, and dashboard

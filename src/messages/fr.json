@@ -45,7 +45,8 @@
     "spots": "Spots",
     "journal": "Journal",
     "compare": "Comparer",
-    "dashboard": "Tableau de bord"
+    "dashboard": "Tableau de bord",
+    "nextHours": "Prochaines heures"
   },
   "spots": {
     "title": "Mes Spots",

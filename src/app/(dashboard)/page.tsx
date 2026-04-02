@@ -7,6 +7,8 @@ import { GaugeSVG } from "@/components/ui/gauge-svg";
 import { CompassSVG } from "@/components/ui/compass-svg";
 import { MoonIcon } from "@/components/ui/moon-icon";
 import { LocationSearch } from "@/components/location-search";
+import HourlyForecastBar from "@/components/hourly-forecast";
+import type { HourlyForecast } from "@/components/hourly-forecast";
 import type { WeatherData } from "@/lib/services/weather";
 import type { GeocodedLocation } from "@/app/api/geocode/route";
 
@@ -425,6 +427,7 @@ export default function DashboardPage() {
   const t = useTranslations("dashboard");
 
   const [weather, setWeather] = useState<WeatherData | null>(null);
+  const [forecast, setForecast] = useState<HourlyForecast[] | null>(null);
   const [locationName, setLocationName] = useState<string | null>(null);
   const [currentCoords, setCurrentCoords] = useState<{ lat: number; lon: number } | null>(null);
   const [loading, setLoading] = useState(false);
@@ -452,13 +455,20 @@ export default function DashboardPage() {
     setCurrentCoords({ lat, lon });
     setSpotSaved(false);
     try {
-      const res = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body?.error ?? `HTTP ${res.status}`);
+      const [weatherRes, forecastRes] = await Promise.all([
+        fetch(`/api/weather?lat=${lat}&lon=${lon}`),
+        fetch(`/api/weather/forecast?lat=${lat}&lon=${lon}`),
+      ]);
+      if (!weatherRes.ok) {
+        const body = await weatherRes.json().catch(() => ({}));
+        throw new Error(body?.error ?? `HTTP ${weatherRes.status}`);
       }
-      const data: WeatherData = await res.json();
+      const data: WeatherData = await weatherRes.json();
       setWeather(data);
+      if (forecastRes.ok) {
+        const fData = await forecastRes.json();
+        setForecast(fData.hourly ?? null);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : tc("error"));
     } finally {
@@ -706,6 +716,11 @@ export default function DashboardPage() {
       {/* Weather gauges */}
       {!loading && weather && !error && (
         <WeatherGauges data={weather} t={t} />
+      )}
+
+      {/* Hourly forecast */}
+      {!loading && forecast && forecast.length > 0 && (
+        <HourlyForecastBar hourly={forecast} />
       )}
     </div>
   );

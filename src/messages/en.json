@@ -45,7 +45,8 @@
     "spots": "Spots",
     "journal": "Journal",
     "compare": "Compare",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "nextHours": "Next hours"
   },
   "spots": {
     "title": "My Spots",

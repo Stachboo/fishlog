@@ -45,7 +45,8 @@
     "spots": "المواقع",
     "journal": "السجل",
     "compare": "مقارنة",
-    "dashboard": "لوحة التحكم"
+    "dashboard": "لوحة التحكم",
+    "nextHours": "الساعات القادمة"
   },
   "spots": {
     "title": "مواقعي",

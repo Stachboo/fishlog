@@ -532,15 +532,16 @@ export default function DashboardPage() {
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          gap: "var(--spacing-md)",
-          flexWrap: "wrap",
+          gap: "var(--spacing-sm)",
         }}
+        className="md:!flex-row md:!items-center md:!gap-[var(--spacing-md)]"
       >
         {/* Location name */}
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ minWidth: 0, textAlign: "center", width: "100%" }} className="md:!text-left md:!flex-1 md:!w-auto">
           {locationName ? (
-            <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-sm)" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "var(--spacing-sm)" }} className="md:!justify-start">
               <h1
                 style={{
                   fontFamily: "var(--font-body)",
@@ -548,9 +549,6 @@ export default function DashboardPage() {
                   fontWeight: 600,
                   color: "var(--color-text-primary)",
                   margin: 0,
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
                 }}
               >
                 {locationName}
